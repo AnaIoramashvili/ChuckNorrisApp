@@ -6,7 +6,7 @@ struct ChuckNorrisJoke: Codable {
 }
 
 class ViewController: UIViewController {
-    // I LOVE ANA
+    //I <3 ZEDGO
     @IBOutlet weak var jokeLabel: UILabel!
     @IBOutlet weak var jokeButton: UIButton!
     
