@@ -2,6 +2,8 @@ import UIKit
 
 struct ChuckNorrisJoke: Codable {
     let value: String
+    
+
 }
 
 class ViewController: UIViewController {
@@ -17,23 +19,31 @@ class ViewController: UIViewController {
         setupUI()
         fetchCategories()
     }
+    
+    
 
     func setupUI() {
-        // Set up the label
+
         jokeLabel.numberOfLines = 0
         jokeLabel.textAlignment = .center
         jokeLabel.text = ""
 
         // Set up the joke button
         jokeButton.layer.cornerRadius = 8
-        jokeButton.backgroundColor = UIColor.systemBlue
+        jokeButton.backgroundColor = UIColor.systemPink
         jokeButton.setTitleColor(UIColor.white, for: .normal)
-        jokeButton.setTitle("Generate", for: .normal)
+        jokeButton.setTitle("Fetch Jokes", for: .normal)
+        
+        
+        view.backgroundColor = UIColor.systemPurple
         
 
         // Set up the category picker
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
+        
+        
+        
     }
 
     func fetchCategories() {
@@ -59,10 +69,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func fetchJoke(_ sender: UIButton) {
-        // Get the selected category from the picker
         let selectedCategory = categories[safe: categoryPicker.selectedRow(inComponent: 0)] ?? ""
 
-        // Build the URL for fetching a random joke from the selected category
         let apiUrlString = "https://api.chucknorris.io/jokes/random?category=\(selectedCategory)"
         guard let apiUrl = URL(string: apiUrlString) else {
             return
@@ -71,10 +79,8 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: apiUrl) { data, response, error in
             if let data = data {
                 do {
-                    // Decode the joke from the data
                     let joke = try JSONDecoder().decode(ChuckNorrisJoke.self, from: data)
                     DispatchQueue.main.async {
-                        // Display the joke with a fade-in animation
                         UIView.animate(withDuration: 0.5) {
                             self.jokeLabel.alpha = 0
                             self.jokeLabel.text = joke.value
@@ -105,7 +111,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // You can add further actions here if needed
     }
 }
 
