@@ -21,14 +21,12 @@ class ViewController: UIViewController {
     }
     
     
-
     func setupUI() {
 
         jokeLabel.numberOfLines = 0
         jokeLabel.textAlignment = .center
         jokeLabel.text = ""
 
-        // Set up the joke button
         jokeButton.layer.cornerRadius = 8
         jokeButton.backgroundColor = UIColor.systemPink
         jokeButton.setTitleColor(UIColor.white, for: .normal)
@@ -38,11 +36,8 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.systemPurple
         
 
-        // Set up the category picker
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
-        
-        
         
     }
 
