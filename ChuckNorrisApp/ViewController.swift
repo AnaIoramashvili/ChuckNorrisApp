@@ -49,10 +49,8 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: categoriesUrl) { data, response, error in
             if let data = data {
                 do {
-                    // Decode the categories from the data
                     let categoriesResponse = try JSONDecoder().decode([String].self, from: data)
                     DispatchQueue.main.async {
-                        // Update the categories and reload the picker
                         self.categories = categoriesResponse
                         self.categoryPicker.reloadAllComponents()
                     }
